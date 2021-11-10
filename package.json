@@ -1,5 +1,11 @@
 {
     "devDependencies": {
         "cypress": "^8.7.0"
+    },
+    "dependencies": {
+        "cypress-real-events": "^1.5.1"
+    },
+    "scripts": {
+        "runTests": "cypress run --browser chrome"
     }
 }
