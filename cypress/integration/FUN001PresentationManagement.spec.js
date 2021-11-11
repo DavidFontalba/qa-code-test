@@ -13,6 +13,14 @@ beforeEach(() => {
     LoginPage.insertEmail(data.credentials.email);
     LoginPage.insertPassword(data.credentials.password);
     LoginPage.clickLoginSubmitButton();
+
+    //Create a Basic Genially
+    MainPage.clickCreateGenially();
+    MainPage.clickPresentation();
+    MainPage.clickATemplate();
+    MainPage.clickUseTemplate();
+    MainPage.selectAllTemplates();
+    MainPage.addTheSelectedPages();
 })
 
 describe('FUN001 Presentation Management', function () {
@@ -22,13 +30,6 @@ describe('FUN001 Presentation Management', function () {
      * delete it to check that it remains in the bin
      */
     it('CP01 Deleted presentations are kept in the bin', function () {
-        MainPage.clickCreateGenially();
-        MainPage.clickPresentation();
-        MainPage.clickATemplate();
-        MainPage.clickUseTemplate();
-        MainPage.selectAllTemplates();
-        MainPage.addTheSelectedPages();
-
         CreationPage.clickDashboard();
 
         MainPage.hoverGenially(geniallyName);
@@ -42,13 +43,6 @@ describe('FUN001 Presentation Management', function () {
      * finally go back to the Dashboard to check that it have all the properly options
      */
     it('CP02 Publish', function () {
-        MainPage.clickCreateGenially();
-        MainPage.clickPresentation();
-        MainPage.clickATemplate();
-        MainPage.clickUseTemplate();
-        MainPage.selectAllTemplates();
-        MainPage.addTheSelectedPages();
-
         CreationPage.clickAllSet();
         CreationPage.publishGenially();
         CreationPage.closePublishModal();
@@ -57,5 +51,19 @@ describe('FUN001 Presentation Management', function () {
 
         MainPage.hoverGenially(geniallyName);
         MainPage.assertGeniallyIsPublic();
+    });
+
+    /**
+    * In this test, we login into an account to create and copy a presentation and
+    * finally go back to the Dashboard to check that both Genially exists
+    */
+    it('CP03  Duplicate a Genially', function () {
+        CreationPage.openHamburgerMenu();
+        CreationPage.clickDuplicateGenially();
+        CreationPage.assertTitle(`Copia - ${geniallyName}`)
+
+        CreationPage.clickDashboard();
+
+        MainPage.assertGeniallyCopied(geniallyName);
     });
 });

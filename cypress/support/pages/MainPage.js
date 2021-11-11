@@ -104,5 +104,15 @@ class MainPage {
         cy.log('Asserting that the Genially is public');
         cy.get(this.shareGeniallyButton).eq(0).should('be.visible').parent().children().should('have.length', 5);
     }
+
+    /**
+     * Check that both genially are copied
+     */
+     assertGeniallyCopied = (name) => {
+        cy.log('Checking that the Genially has been copied.');
+        cy.get(`[data-cy='geniallyItem${name}']`).eq(0).should('be.visible');
+        cy.get(`[data-cy='geniallyItemCopia - ${name}']`).eq(0).should('be.visible');
+
+    }
 }
 export default new MainPage();
