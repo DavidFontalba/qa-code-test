@@ -20,8 +20,8 @@ class LoginPage {
      */
     insertEmail = (email) => {
         cy.log('Introducing email to login.');
-        cy.wait(200);
-        cy.get(this.emailInput).eq(0).should('be.visible').type(email);
+        cy.get(this.emailInput).eq(0).should('be.visible').click()
+            .type(email, {force: true}).should('have.value', email);
     }
 
     /**
@@ -30,8 +30,8 @@ class LoginPage {
      */
     insertPassword = (password) => {
         cy.log('Introducing password to login');
-        cy.wait(200);
-        cy.get(this.passwordInput).eq(0).should('be.visible').type(password);
+        cy.get(this.passwordInput).eq(0).should('be.visible').click()
+            .type(password, {force: true}).should('have.value', password);
     }
 
     /**

@@ -12,6 +12,7 @@ class MainPage {
         this.markAsDeletedOption = "[data-cy='markAsDeletedOption']";
         this.confirmDelete = "[data-cy='markAsDeleteButton']";
         this.binButton = "[data-cy='recycleBin']";
+        this.shareGeniallyButton = "[data-cy='shareGenially']";
     }
 
     /**
@@ -25,7 +26,7 @@ class MainPage {
     /**
      * Click the presentation button to choose a template.
      */
-     clickPresentation = () => {
+    clickPresentation = () => {
         cy.log('Clicking Presentation button.');
         cy.get(this.presentationButton).eq(0).should('be.visible').click();
     }
@@ -33,7 +34,7 @@ class MainPage {
     /**
      * Click a template item to choose the template.
      */
-     clickATemplate = () => {
+    clickATemplate = () => {
         cy.log('Clicking a template.');
         cy.get(this.templateItem).eq(0).should('be.visible').click();
     }
@@ -41,7 +42,7 @@ class MainPage {
     /**
      * Confirms the template.
      */
-     clickUseTemplate = () => {
+    clickUseTemplate = () => {
         cy.log('Clicking Use Template button.');
         cy.get(this.useTemplateButton).eq(0).should('be.visible').click();
     }
@@ -49,7 +50,7 @@ class MainPage {
     /**
      * Check the checkbox that selects all the pages
      */
-     selectAllTemplates = () => {
+    selectAllTemplates = () => {
         cy.log('Checking all the pages.');
         cy.get(this.allTemplatesCheck).eq(0).should('be.visible').check();
     }
@@ -57,24 +58,31 @@ class MainPage {
     /**
      * Add the selected pages to create a Genially
      */
-     addTheSelectedPages = () => {
+    addTheSelectedPages = () => {
         cy.log('Adding all the selected pages.');
         cy.get(this.addButton).eq(0).should('be.visible').click();
     }
 
     /**
+     * Does the hover event over the Genially with the properly name
+     */
+    hoverGenially = (name) => {
+        cy.log('Hovering over the Genially.');
+        cy.get(`[data-cy='geniallyItem${name}']`).eq(0).should('be.visible').realHover();
+    }
+
+    /**
      * Opens the dropdown over a Genially
      */
-     openGeniallyDropdown = (name) => {
+    openGeniallyDropdown = () => {
         cy.log('Clicking the Genially Dropdown.');
-        cy.get(`[data-cy='geniallyItem${name}']`).eq(0).should('be.visible').realHover();
         cy.get(this.geniallyDropdown).eq(0).should('be.visible').click();
     }
 
     /**
      * Clicks the delete option in the genially dropdown and accept the confirmation for the action.
      */
-     deleteAGenially = () => {
+    deleteAGenially = () => {
         cy.log('Deleting a Genially.');
         cy.get(this.markAsDeletedOption).eq(0).should('be.visible').click();
         cy.get(this.confirmDelete).eq(0).should('be.visible').click();
@@ -83,12 +91,18 @@ class MainPage {
     /**
      * Click on Bin icon at Side menu and checks that the deleted Genially is there
      */
-     clickBinButton = (name) => {
+    clickBinButton = (name) => {
         cy.log('Navigating to Bin');
         cy.get(this.binButton).eq(0).should('be.visible').click();
         cy.get(`[data-cy='deletedGenially${name}']`).eq(0).should('be.visible');
     }
 
-
+    /**
+     * Check that the card of the Genially have the properly number of elements
+     */
+    assertGeniallyIsPublic = () => {
+        cy.log('Asserting that the Genially is public');
+        cy.get(this.shareGeniallyButton).eq(0).should('be.visible').parent().children().should('have.length', 5);
+    }
 }
 export default new MainPage();

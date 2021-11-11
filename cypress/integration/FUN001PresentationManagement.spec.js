@@ -31,8 +31,31 @@ describe('FUN001 Presentation Management', function () {
 
         CreationPage.clickDashboard();
 
-        MainPage.openGeniallyDropdown(geniallyName);
+        MainPage.hoverGenially(geniallyName);
+        MainPage.openGeniallyDropdown();
         MainPage.deleteAGenially();
         MainPage.clickBinButton(geniallyName);
-    }); 
-}); 
+    });
+
+    /**
+     * In this test, we login into an account to create and publish a presentation and
+     * finally go back to the Dashboard to check that it have all the properly options
+     */
+    it('CP02 Publish', function () {
+        MainPage.clickCreateGenially();
+        MainPage.clickPresentation();
+        MainPage.clickATemplate();
+        MainPage.clickUseTemplate();
+        MainPage.selectAllTemplates();
+        MainPage.addTheSelectedPages();
+
+        CreationPage.clickAllSet();
+        CreationPage.publishGenially();
+        CreationPage.closePublishModal();
+
+        CreationPage.clickDashboard();
+
+        MainPage.hoverGenially(geniallyName);
+        MainPage.assertGeniallyIsPublic();
+    });
+});
