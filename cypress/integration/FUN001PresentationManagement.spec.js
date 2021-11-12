@@ -1,3 +1,8 @@
+/**
+ * Tests related to Presentation Management functionallity
+ * @author David Galván Fontalba
+ * @version 1
+ */
 import env from '../config/config.json'
 import data from '../fixtures/FUN001PresentationManagement.json'
 import LoginPage from '../support/pages/LoginPage.js'
@@ -39,8 +44,8 @@ describe('FUN001 Presentation Management', function () {
     });
 
     /**
-     * In this test, we login into an account to create and publish a presentation and
-     * finally go back to the Dashboard to check that it have all the properly options
+     * In this test, we login into an account to create a presentation and publish
+     * it to check that it has been published properly.
      */
     it('CP02 Publish', function () {
         CreationPage.clickAllSet();
@@ -54,10 +59,10 @@ describe('FUN001 Presentation Management', function () {
     });
 
     /**
-    * In this test, we login into an account to create and copy a presentation and
-    * finally go back to the Dashboard to check that both Genially exists
+    * In this test, we login into an account to create a presentation and duplicate
+    * it to check that it has been copied properly and both remains.
     */
-    it('CP03  Duplicate a Genially', function () {
+    it('CP03 Duplicate a Genially', function () {
         CreationPage.openHamburgerMenu();
         CreationPage.clickDuplicateGenially();
         CreationPage.assertTitle(`Copia - ${geniallyName}`)

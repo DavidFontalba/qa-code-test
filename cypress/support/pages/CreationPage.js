@@ -1,3 +1,8 @@
+/**
+ * Page Object Model for Creation Page
+ * @author David Galván Fontalba
+ * @version 1
+ */
 class CreationPage {
     constructor() {
         this.goToDashboardButton = "[data-cy='dashboard']";

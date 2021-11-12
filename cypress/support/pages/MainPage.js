@@ -1,4 +1,9 @@
-import "cypress-real-events/support";
+/**
+ * Page Object Model for Main Page
+ * @author David Galván Fontalba
+ * @version 1
+ */
+import 'cypress-real-events/support';
 
 class MainPage {
     constructor() {
@@ -13,6 +18,9 @@ class MainPage {
         this.confirmDelete = "[data-cy='markAsDeleteButton']";
         this.binButton = "[data-cy='recycleBin']";
         this.shareGeniallyButton = "[data-cy='shareGenially']";
+        this.userProfileSection = "[data-cy='userProfileSection']";
+        this.accountSettings = "[data-cy='accountSettings']";
+        this.dashboard = "[data-cy='dashboard']";
     }
 
     /**
@@ -108,11 +116,34 @@ class MainPage {
     /**
      * Check that both genially are copied
      */
-     assertGeniallyCopied = (name) => {
+    assertGeniallyCopied = (name) => {
         cy.log('Checking that the Genially has been copied.');
         cy.get(`[data-cy='geniallyItem${name}']`).eq(0).should('be.visible');
         cy.get(`[data-cy='geniallyItemCopia - ${name}']`).eq(0).should('be.visible');
+    }
 
+    /* 
+     * Click at the user profile section at the top right corner
+     */
+    openUserProfileSection = () => {
+        cy.log('Opening User Profile Section.');
+        cy.get(this.userProfileSection).eq(0).should('be.visible').click();
+    }
+
+    /**
+     * Click at the account settings option in the profile section
+     */
+    openAccountSettings = () => {
+        cy.log('Navigating to Account Settings.');
+        cy.get(this.accountSettings).eq(0).should('be.visible').click({force: true});
+    }
+
+    /**
+     * Click the Creations button in the left to go back to the Main Page.
+     */
+     clickDashboard = () => {
+        cy.log('Clicking dashboard button.');
+        cy.get(this.dashboard).eq(0).should('be.visible').click();
     }
 }
 export default new MainPage();

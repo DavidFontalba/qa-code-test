@@ -1,3 +1,8 @@
+/**
+ * Page Object Model for Login Page
+ * @author David Galván Fontalba
+ * @version 1
+ */
 class LoginPage {
     constructor() {
         this.loginButton = "[data-cy='loginButton']";
